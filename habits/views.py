@@ -11,15 +11,8 @@ class HabitCreateAPIView(generics.CreateAPIView):
     """ Создание привычки """
 
     serializer_class = HabitSerializer
-    queryset = Habit.objects.all()
     permission_classes = [IsAuthenticated]
 
-    def perform_create(self, serializer):
-        """ Определяем порядок создания нового объекта """
-
-        new_habit = serializer.save()
-        new_habit.user = self.request.user
-        new_habit.save()
 
 
 class HabitListAPIView(generics.ListAPIView):
