@@ -85,9 +85,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'kurs7drf',
+        'NAME': 'postgres',
         'USER': 'postgres',
-        'PASSWORD': '1234'
+        'HOST': 'db',
+        'PORT': '5432',
+        'PASSWORD': 'mysecretpassword'
     }
 }
 
@@ -147,6 +149,8 @@ REST_FRAMEWORK = {
 
 TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
 
+CELERY_IMPORTS = ('habits.tasks',)
+
 # URL-адрес брокера сообщений
 CELERY_BROKER_URL = 'redis://localhost:6379'  # Например, Redis, который по умолчанию работает на порту 6379
 
@@ -154,10 +158,11 @@ CELERY_BROKER_URL = 'redis://localhost:6379'  # Например, Redis, кот�
 CELERY_RESULT_BACKEND = 'redis://localhost:6379'
 
 # Часовой пояс для работы Celery
-CELERY_TIMEZONE = "UTC"
+CELERY_TIMEZONE = "Europe/Moscow"
 
 # Флаг отслеживания выполнения задач
 CELERY_TASK_TRACK_STARTED = True
+
 BROKER_CONNECTION_RETRY_ON_STARTUP = True
 
 # Максимальное время на выполнение задачи
